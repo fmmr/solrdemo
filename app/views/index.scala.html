@@ -1,7 +1,10 @@
-@(message: String)
+@(ads: List[Ad])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message, style = "Java")
-    
+@main(title = "FMR SOLR DEMO") {
+    <ul>
+        @for(ad <- ads) {
+            <li> @ad.getId @ad.getCompanyname </li>
+        }
+    </ul>
 }
+
