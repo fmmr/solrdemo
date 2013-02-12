@@ -1,28 +1,42 @@
-import org.junit.*;
+import org.junit.Test;
+import play.libs.F.Callback;
+import play.test.TestBrowser;
 
-import play.mvc.*;
-import play.test.*;
-import play.libs.F.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
-
-import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 public class IntegrationTest {
 
-    /**
-     * add your integration test here
-     * in this example we just check if the welcome page is being shown
-     */   
+    //Ad: 3c931309-6476-41f5-9cd6-63a3a259a6ed added in 140ms
+    private static final Pattern ADD_ADID = Pattern.compile("Ad: (.*) added in .*");
+
     @Test
-    public void test() {
+    public void test_add() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
-                browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Your new application is ready.");
+                browser.goTo("http://localhost:3333/add");
+                assertThat(browser.pageSource()).contains("added");
             }
         });
     }
-  
+
+
+    @Test
+    public void test_add_and_search() {
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+            public void invoke(TestBrowser browser) {
+                browser.goTo("http://localhost:3333/add");
+                String content = browser.pageSource();
+                Matcher matcher = ADD_ADID.matcher(content);
+                matcher.matches();
+                String adId = matcher.group(1);
+
+                browser.goTo("http://localhost:3333");
+                assertThat(browser.pageSource()).contains(adId);
+            }
+        });
+    }
 }
