@@ -2,7 +2,23 @@
     font-size: small;
 }
 
-.backlink{
+.backlink {
     font-size: small;
+}
 
+.footer {
+    font-size: smaller;
+}
+
+hr {
+    border: none;
+    width: 30%;
+    margin-left: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #ddd;
+    color: #ddd;
+    height: 1px;
+    *height: 2px; /* IE6+7 need the total height */
 }
