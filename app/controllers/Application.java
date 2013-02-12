@@ -11,7 +11,7 @@ import views.html.index;
  * Time: 11:54
  */
 public class Application extends Controller {
-    public static Result index() throws SolrServerException {
-        return ok(index.render());
+    public static Result index(String message) throws SolrServerException {
+        return ok(index.render(message, LocalSolr.getCount()));
     }
 }

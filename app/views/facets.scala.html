@@ -1,0 +1,18 @@
+@(facets: List[org.apache.solr.client.solrj.response.FacetField.Count], num: Long = 0L, ms: Long = 0L)
+
+@main(title = "Total matches: " + num + " ads", ms) {
+
+    <table>
+        <tr>
+            <th> Facet </th>
+            <th> count </th>
+        </tr>
+        @for(facet <- facets) {
+            <tr>
+            <td> @facet.getName </td>
+            <td> @facet.getCount </td>
+            </tr>
+        }
+    </table>
+}
+

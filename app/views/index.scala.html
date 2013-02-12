@@ -1,12 +1,19 @@
-@main(title = "FMR SOLR DEMO") {
+@(message: String = null, num: Long = 0L)
 
-<h3>Local operations</h3>
-<a href="@routes.LocalSolr.add()"> add 1 ad to index</a> <br>
-<a href="@routes.LocalSolr.addMany()"> add 100 ads to index</a> <br>
-<a href="@routes.LocalSolr.index()"> get 10 random ads from index</a> <br>
-<a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
+@main(title = "Total docs in local index: " + num ) {
 
-<h3>Remote operations</h3>
-<a href="@routes.RemoteSolr.index()"> get 10 ads from remote index</a> <br>
+    @if(message != null){
+         <h3>@message</h3>
+    }
+
+    <h3> Local operations </h3>
+    <a href="@routes.LocalSolr.add()"> add 1 ad to index </a> <br>
+    <a href="@routes.LocalSolr.addMany()"> add 100 ads to index </a> <br>
+    <a href="@routes.LocalSolr.search()"> get 10 random ads from index </a> <br>
+    <a href="@routes.LocalSolr.facets()"> get 10 facets on companyname </a> <br>
+    <a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
+
+    <h3> Remote operations </h3>
+    <a href="@routes.RemoteSolr.index()"> get 10 ads from remote index </a> <br>
 }
 
