@@ -2,6 +2,7 @@ atlassian-ide-plugin.xml
 logs
 project/project
 project/target
+solr/data
 target
 tmp
 .history

@@ -51,20 +51,7 @@ public class LocalSolr extends Controller {
     }
 
     public static Result add() throws IOException, SolrServerException {
-        Timer tim = new Timer();
-        Ad ad = Ad.getAd();
-        server.addBean(ad);
-        server.commit();
-        System.out.println("Added doc in " + tim.stop() + "ms");
-        return ok(simple.render("Ad: " + ad.getId() + " added", "Added ad", tim.stop()));
-    }
-
-    public static Result removeAll() throws IOException, SolrServerException {
-        Timer tim = new Timer();
-        server.deleteByQuery("*:*");
-        server.commit();
-        System.out.println("Cleared index in " + tim.stop() + "ms");
-        return ok(simple.render("Cleared index", "Cleared index", tim.stop()));
+        return addMany(1);
     }
 
     public static Result addMany(int many) throws IOException, SolrServerException {
@@ -77,5 +64,13 @@ public class LocalSolr extends Controller {
         server.commit();
         System.out.println("Added " + ads.size() + " ads in " + tim.stop() + "ms");
         return ok(simple.render("Added " + ads.size() + " ads", "Added ads", tim.stop()));
+    }
+
+    public static Result removeAll() throws IOException, SolrServerException {
+        Timer tim = new Timer();
+        server.deleteByQuery("*:*");
+        server.commit();
+        System.out.println("Cleared index in " + tim.stop() + "ms");
+        return ok(simple.render("Cleared index", "Cleared index", tim.stop()));
     }
 }
