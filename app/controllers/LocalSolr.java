@@ -47,7 +47,7 @@ public class LocalSolr extends Controller {
         QueryResponse rsp = server.query(query);
         List<Ad> adList = rsp.getBeans(Ad.class);
         System.out.println("Searched all ads in " + tim.stop() + "ms");
-        return ok(ads.render(adList, tim.stop()));
+        return ok(ads.render(adList, rsp.getResults().getNumFound(), tim.stop()));
     }
 
     public static Result add() throws IOException, SolrServerException {

@@ -1,5 +1,7 @@
 package utils;
 
+import org.joda.time.DateTime;
+
 /**
 * User: frerodla
 * Date: 12.02.13
@@ -18,5 +20,12 @@ public final class Timer {
             stop = System.currentTimeMillis();
         }
         return stop - start;
+    }
+
+    @Override
+    public String toString() {
+        return "Timer{" +
+                "start=" + new DateTime(start) +
+                '}';
     }
 }

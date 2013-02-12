@@ -36,7 +36,7 @@ public class RemoteSolr extends Controller {
 
         QueryResponse rsp = server.query(query);
         List<Ad> adList = rsp.getBeans(Ad.class);
-        return ok(ads.render(adList, tim.stop()));
+        return ok(ads.render(adList, rsp.getResults().getNumFound(), tim.stop()));
     }
 
 

@@ -37,9 +37,11 @@ public class ApplicationTest {
         list.add(ad);
         list.add(Ad.getAd());
 
-        Content html = views.html.ads.render(list, 0L);
+        Content html = views.html.ads.render(list, 100L, 50L);
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains(ad.getCompanyname());
+        assertThat(contentAsString(html)).contains("50 ms");
+        assertThat(contentAsString(html)).contains("100 ads");
     }
 
 

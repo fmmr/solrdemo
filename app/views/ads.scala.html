@@ -1,6 +1,6 @@
-@(ads: List[Ad], ms: Long = 0L)
+@(ads: List[Ad], num: Long = 0L, ms: Long = 0L)
 
-@main(title = "List of ads", ms) {
+@main(title = "Total matches: " + num + " ads", ms) {
 
     <table>
         <tr>
@@ -9,8 +9,8 @@
         </tr>
         @for(ad <- ads) {
             <tr>
-                <td> @ad.getId </td>
-                <td> @ad.getCompanyname </td>
+            <td> @ad.getId </td>
+            <td> @ad.getCompanyname </td>
             </tr>
         }
     </table>
