@@ -1,13 +1,14 @@
 package controllers;
 
 import models.Ad;
+import utils.Timer;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+import views.html.ads;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class RemoteSolr extends Controller {
     private static HttpSolrServer server = new HttpSolrServer("http://" + HOST + ":" + PORT + "/solr");
 
     public static Result index() throws SolrServerException {
+        Timer tim = new Timer();
         SolrQuery query = new SolrQuery();
         query.setQuery("{!func}geodist()");
         query.setFields("id,companyname,heading,fulladdress,coordinates,score");
@@ -33,8 +35,8 @@ public class RemoteSolr extends Controller {
         query.setQueryType("dismax");
 
         QueryResponse rsp = server.query(query);
-        List<Ad> ads = rsp.getBeans(Ad.class);
-        return ok(index.render(ads));
+        List<Ad> adList = rsp.getBeans(Ad.class);
+        return ok(ads.render(adList, tim.stop()));
     }
 
 

@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Ad;
+import utils.Timer;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -9,7 +10,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.core.CoreContainer;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+import views.html.simple;
+import views.html.ads;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,9 +45,9 @@ public class LocalSolr extends Controller {
         query.setQuery("*:*");
         query.setSortField("random_" + UUID.randomUUID().toString(), asc);
         QueryResponse rsp = server.query(query);
-        List<Ad> ads = rsp.getBeans(Ad.class);
+        List<Ad> adList = rsp.getBeans(Ad.class);
         System.out.println("Searched all ads in " + tim.stop() + "ms");
-        return ok(index.render(ads));
+        return ok(ads.render(adList, tim.stop()));
     }
 
     public static Result add() throws IOException, SolrServerException {
@@ -54,7 +56,7 @@ public class LocalSolr extends Controller {
         server.addBean(ad);
         server.commit();
         System.out.println("Added doc in " + tim.stop() + "ms");
-        return ok("Ad: " + ad.getId() + " added in " + tim.stop() + "ms");
+        return ok(simple.render("Ad: " + ad.getId() + " added", "Added ad", tim.stop()));
     }
 
     public static Result removeAll() throws IOException, SolrServerException {
@@ -62,7 +64,7 @@ public class LocalSolr extends Controller {
         server.deleteByQuery("*:*");
         server.commit();
         System.out.println("Cleared index in " + tim.stop() + "ms");
-        return ok("Cleared index in " + tim.stop() + "ms");
+        return ok(simple.render("Cleared index", "Cleared index", tim.stop()));
     }
 
     public static Result addMany() throws IOException, SolrServerException {
@@ -75,22 +77,7 @@ public class LocalSolr extends Controller {
         server.addBeans(ads);
         server.commit();
         System.out.println("Added " + ads.size() + " ads in " + tim.stop() + "ms");
-        return ok("Added " + ads.size() + " ads in " + tim.stop() + "ms");
+        return ok(simple.render("Added " + ads.size() + " ads", "Added ads", tim.stop()));
     }
 
-    private static final class Timer {
-        private final long start;
-        private long stop = 0L;
-
-        private Timer() {
-            start = System.currentTimeMillis();
-        }
-
-        public long stop() {
-            if (stop == 0L) {
-                stop = System.currentTimeMillis();
-            }
-            return stop - start;
-        }
-    }
 }

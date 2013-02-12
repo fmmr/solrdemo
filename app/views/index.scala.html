@@ -1,10 +1,12 @@
-@(ads: List[Ad])
-
 @main(title = "FMR SOLR DEMO") {
-    <ul>
-        @for(ad <- ads) {
-            <li> @ad.getId @ad.getCompanyname </li>
-        }
-    </ul>
+
+<h3>Local operations</h3>
+<a href="@routes.LocalSolr.add()"> add 1 ad to index</a> <br>
+<a href="@routes.LocalSolr.addMany()"> add 1000 ads to index</a> <br>
+<a href="@routes.LocalSolr.index()"> get 10 random ads from index</a> <br>
+<a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
+
+<h3>Remote operations</h3>
+<a href="@routes.RemoteSolr.index()"> get 10 ads from remote index</a> <br>
 }
 

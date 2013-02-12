@@ -13,8 +13,7 @@ open directory as project
 play run
 point your browser to http://localhost:9000
 
-### Search remote index
-must set up host & port in `RemoteSolr.java`.
+### Show 10 random ads
 http://localhost:9000/search
 
 ### Add 1000 docs to index
@@ -25,6 +24,10 @@ http://localhost:9000/add
 
 ### Clear index
 http://localhost:9000/removeall
+
+### Search remote index
+must set up host & port in `RemoteSolr.java`.
+http://localhost:9000/searchremote
 
 ### Persistence
 to persist index on disk:
