@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Ad;
-import utils.Timer;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -10,8 +9,9 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.core.CoreContainer;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.simple;
+import utils.Timer;
 import views.html.ads;
+import views.html.simple;
 
 import java.io.IOException;
 import java.util.ArrayList;

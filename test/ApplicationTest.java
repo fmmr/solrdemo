@@ -24,12 +24,20 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
+        Content html = views.html.index.render();
+        assertThat(contentType(html)).isEqualTo("text/html");
+        assertThat(contentAsString(html)).contains("FMR SOLR DEMO");
+    }
+
+
+    @Test
+    public void renderAds() {
         List<Ad> list = new ArrayList<>();
         Ad ad = Ad.getAd();
         list.add(ad);
         list.add(Ad.getAd());
 
-        Content html = views.html.index.render(list);
+        Content html = views.html.ads.render(list, 0L);
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains(ad.getCompanyname());
     }

@@ -11,7 +11,7 @@ import static play.test.Helpers.*;
 public class IntegrationTest {
 
     //Ad: 3c931309-6476-41f5-9cd6-63a3a259a6ed added in 140ms
-    private static final Pattern ADD_ADID = Pattern.compile("Ad: (.*) added in .*");
+    private static final Pattern ADD_ADID = Pattern.compile(".*Ad:(.*) added.*", Pattern.DOTALL);
 
     @Test
     public void test_add() {
@@ -34,7 +34,7 @@ public class IntegrationTest {
                 matcher.matches();
                 String adId = matcher.group(1);
 
-                browser.goTo("http://localhost:3333");
+                browser.goTo("http://localhost:3333/search");
                 assertThat(browser.pageSource()).contains(adId);
             }
         });
