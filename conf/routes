@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 GET     /search                     controllers.LocalSolr.index()
 GET     /add                        controllers.LocalSolr.add()
-GET     /addmany                    controllers.LocalSolr.addMany()
+GET     /addmany                    controllers.LocalSolr.addMany(num: Integer ?= 100)
 GET     /removeall                  controllers.LocalSolr.removeAll()
 
 GET     /searchremote               controllers.RemoteSolr.index()

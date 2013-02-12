@@ -67,9 +67,8 @@ public class LocalSolr extends Controller {
         return ok(simple.render("Cleared index", "Cleared index", tim.stop()));
     }
 
-    public static Result addMany() throws IOException, SolrServerException {
+    public static Result addMany(int many) throws IOException, SolrServerException {
         Timer tim = new Timer();
-        int many = 1000;
         List<Ad> ads = new ArrayList<>();
         for (int i = 0; i < many; i++) {
             ads.add(Ad.getAd());
@@ -79,5 +78,4 @@ public class LocalSolr extends Controller {
         System.out.println("Added " + ads.size() + " ads in " + tim.stop() + "ms");
         return ok(simple.render("Added " + ads.size() + " ads", "Added ads", tim.stop()));
     }
-
 }
