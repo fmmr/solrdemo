@@ -1,0 +1,18 @@
+@(ads: List[Ad], ms: Long = 0L)
+
+@main(title = "List of ads", ms) {
+
+    <table>
+        <tr>
+            <th style="text-align: left"> Id </th>
+            <th style="text-align: left"> Company name </th>
+        </tr>
+        @for(ad <- ads) {
+            <tr>
+                <td> @ad.getId </td>
+                <td> @ad.getCompanyname </td>
+            </tr>
+        }
+    </table>
+}
+
