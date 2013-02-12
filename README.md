@@ -15,6 +15,7 @@ point your browser to http://localhost:9000
 
 ### Search remote index
 must set up host & port in `RemoteSolr.java`
+
 http://localhost:9000/search
 
 ### Add 1000 docs to index
