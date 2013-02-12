@@ -10,6 +10,10 @@
     font-size: smaller;
 }
 
+th {
+    text-align: left;
+}
+
 hr {
     border: none;
     width: 30%;
