@@ -18,7 +18,7 @@ import java.util.UUID;
 
 import static org.apache.solr.client.solrj.SolrQuery.ORDER.asc;
 
-public class Application extends Controller {
+public class LocalSolr extends Controller {
     private static SolrServer server;
 
 

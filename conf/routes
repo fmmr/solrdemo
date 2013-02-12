@@ -3,10 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-GET     /add                        controllers.Application.add()
-GET     /addmany                    controllers.Application.addMany()
-GET     /removeall                  controllers.Application.removeAll()
+GET     /                           controllers.LocalSolr.index()
+GET     /add                        controllers.LocalSolr.add()
+GET     /addmany                    controllers.LocalSolr.addMany()
+GET     /removeall                  controllers.LocalSolr.removeAll()
+
+GET     /search                           controllers.RemoteSolr.index()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
