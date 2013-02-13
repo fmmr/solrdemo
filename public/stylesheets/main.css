@@ -9,7 +9,18 @@
 .footer {
     font-size: smaller;
 }
-
+table{
+    border-collapse:collapse;
+}
+table,th, td{
+    border: 1px solid black;
+}
+td{
+    padding-left:4px;
+    padding-right:4px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
 th {
     text-align: left;
 }

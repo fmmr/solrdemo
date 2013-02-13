@@ -2,15 +2,17 @@
 
 @main(title = "Total matches: " + num + " ads", ms) {
 
-    <table>
+    <table class="adtable">
         <tr>
             <th> Id </th>
             <th> Company name </th>
+            <th> Title </th>
         </tr>
         @for(ad <- ads) {
             <tr>
-            <td> @ad.getId </td>
-            <td> @ad.getCompanyname </td>
+            <td> @ad.id </td>
+            <td> @ad.companyname </td>
+            <td> @ad.title </td>
             </tr>
         }
     </table>

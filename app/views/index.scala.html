@@ -1,10 +1,8 @@
-@(message: String = null, num: Long = 0L)
+@(num: Long = 0L)(implicit flash: play.mvc.Http.Flash)
 
 @main(title = "Total docs in local index: " + num ) {
 
-    @if(message != null){
-         <h3>@message</h3>
-    }
+    @flash.get("message")
 
     <h3> Local operations </h3>
     <a href="@routes.LocalSolr.add()"> add 1 ad to index </a> <br>
@@ -14,6 +12,6 @@
     <a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
 
     <h3> Remote operations </h3>
-    <a href="@routes.RemoteSolr.index()"> get 10 ads from remote index </a> <br>
+    <a href="@routes.RemoteSolr.search()"> get 10 ads from remote index </a> <br>
 }
 
