@@ -5,19 +5,23 @@ Quick [Play 2](http://www.playframework.org/) demo using [SOLR](http://lucene.ap
 
 ### to get this up in intelliJ:
 install plugins: play 2, scala, sbt
+
 play compile
+
 play idea
+
 open directory as project
 
 ### start app:
-play run
+`play run`
+
 point your browser to http://localhost:9000
 
 ### Show 10 random ads
 http://localhost:9000/search
 
 ### Add 1000 docs to index
-http://localhost:9000/addmany
+http://localhost:9000/add?num=1000
 
 ### Add 1 doc to index
 http://localhost:9000/add
@@ -26,8 +30,9 @@ http://localhost:9000/add
 http://localhost:9000/removeall
 
 ### Search remote index
-must set up host & port in `RemoteSolr.java`.
-http://localhost:9000/searchremote
+*must set up host & port in `RemoteSolr.java`.*
+
+http://localhost:9000/remote/search
 
 ### Persistence
 to persist index on disk:

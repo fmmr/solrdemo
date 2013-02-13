@@ -20,11 +20,9 @@ public class RemoteSolr extends Controller {
 
     private static Solr solr = new Solr("solr1.finntech.no", 12100);
 
-    public static Result search() throws SolrServerException {
+    public static Result search(String pos) throws SolrServerException {
         Timer tim = new Timer();
-
-        QueryResponse rsp = solr.geoQuery();
-
+        QueryResponse rsp = solr.geoQuery(pos);
         List<Ad> adList = rsp.getBeans(Ad.class);
         System.out.println("Got " + adList.size() + " ads from " + solr + " in " + tim.stop() + "ms");
         return ok(ads.render(adList, rsp.getResults().getNumFound(), tim.stop()));

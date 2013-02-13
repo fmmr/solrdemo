@@ -30,11 +30,11 @@ public class Solr {
         server = getRemoteServer(host, port);
     }
 
-    public QueryResponse geoQuery() throws SolrServerException {
+    public QueryResponse geoQuery(String pos) throws SolrServerException {
         SolrQuery query = new SolrQuery();
         query.setQuery("{!func}geodist()");
         query.setFields("id,companyname,heading,coordinates,score");
-        query.setParam("pt", "59.91374,10.74385");
+        query.setParam("pt", pos);
         query.setParam("d", "10");
         query.setParam("sfield", "coordinates");
         query.setSortField("geodist()", asc);

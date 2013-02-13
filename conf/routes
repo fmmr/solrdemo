@@ -6,11 +6,10 @@
 GET     /                           controllers.Application.index()
 GET     /search                     controllers.LocalSolr.search()
 GET     /facets                     controllers.LocalSolr.facets(num: Integer ?= 10)
-GET     /add                        controllers.LocalSolr.add()
-GET     /addmany                    controllers.LocalSolr.addMany(num: Integer ?= 100)
+GET     /add                        controllers.LocalSolr.add(num: Integer ?= 1)
 GET     /removeall                  controllers.LocalSolr.removeAll()
 
-GET     /remote/search              controllers.RemoteSolr.search()
+GET     /remote/search              controllers.RemoteSolr.search(pos: String ?= "59.90077,10.56520")
 
 
 # Map static resources from the /public folder to the /assets URL path

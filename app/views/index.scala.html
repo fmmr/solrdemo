@@ -1,17 +1,28 @@
 @(num: Long = 0L)(implicit flash: play.mvc.Http.Flash)
 
-@main(title = "Total docs in local index: " + num ) {
+@main(title = "Total docs in local index: " + num) {
+    <script>
+            function showMap(position) {
+            var $geosearch = $(".geosearch");
+            var pos = position.coords.latitude + "," +  position.coords.longitude;
+            $geosearch.attr('href',$geosearch.attr('href') + '?pos=' + pos);
+            }
+            $(document).ready(function () {
+                navigator.geolocation.getCurrentPosition(showMap);
+            });
+    </script>
 
     @flash.get("message")
 
     <h3> Local operations </h3>
-    <a href="@routes.LocalSolr.add()"> add 1 ad to index </a> <br>
-    <a href="@routes.LocalSolr.addMany()"> add 100 ads to index </a> <br>
+    <a href="@routes.LocalSolr.add()">   add 1 ad to index </a> <br>
+    <a href="@routes.LocalSolr.add(100)"> add 100 ads to index </a> <br>
     <a href="@routes.LocalSolr.search()"> get 10 random ads from index </a> <br>
     <a href="@routes.LocalSolr.facets()"> get 10 facets on companyname </a> <br>
     <a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
 
     <h3> Remote operations </h3>
-    <a href="@routes.RemoteSolr.search()"> get 10 ads from remote index </a> <br>
+    <a class="geosearch" href="@routes.RemoteSolr.search()"> get 10 ads from remote index </a> <br>
+
 }
 

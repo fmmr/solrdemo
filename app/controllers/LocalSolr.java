@@ -48,11 +48,7 @@ public class LocalSolr extends Controller {
         return ok(facets.render(companies, rsp.getResults().getNumFound(), tim.stop()));
     }
 
-    public static Result add() throws IOException, SolrServerException {
-        return addMany(1);
-    }
-
-    public static Result addMany(int many) throws IOException, SolrServerException {
+    public static Result add(int many) throws IOException, SolrServerException {
         Timer tim = new Timer();
         List<Ad> ads = new ArrayList<>();
         for (int i = 0; i < many; i++) {
