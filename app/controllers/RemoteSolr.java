@@ -6,7 +6,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
-import utils.Timer;
+import utils.Timing;
 import views.html.ads;
 
 import java.util.List;
@@ -16,17 +16,14 @@ import java.util.List;
  * Date: 12.02.13
  * Time: 10:36
  */
+@Timing
 public class RemoteSolr extends Controller {
 
     private static Solr solr = new Solr("solr1.finntech.no", 12100);
 
     public static Result search(String pos) throws SolrServerException {
-        Timer tim = new Timer();
         QueryResponse rsp = solr.geoQuery(pos);
         List<Ad> adList = rsp.getBeans(Ad.class);
-        System.out.println("Got " + adList.size() + " ads from " + solr + " in " + tim.stop() + "ms");
-        return ok(ads.render(adList, rsp.getResults().getNumFound(), tim.stop()));
+        return ok(ads.render(adList, rsp.getResults().getNumFound()));
     }
-
-
 }
