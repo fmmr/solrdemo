@@ -21,13 +21,20 @@ import static org.apache.solr.client.solrj.SolrQuery.ORDER.asc;
  */
 public class Solr {
     private final SolrServer server;
+    private final String serverString;
 
     public Solr() {
         server = getLocalServer();
+        serverString = "LOCAL";
     }
 
-    public Solr(String host, int port) {
-        server = getRemoteServer(host, port);
+    public Solr(SolrHost solrHost) {
+        server = getRemoteServer(solrHost + "/solr");
+        serverString = solrHost.toString();
+    }
+
+    private HttpSolrServer getRemoteServer(String baseURL) {
+        return new HttpSolrServer(baseURL);
     }
 
     public QueryResponse geoQuery(String pos) throws SolrServerException {
@@ -79,13 +86,10 @@ public class Solr {
         return new EmbeddedSolrServer(coreContainer, "collection1");
     }
 
-    private HttpSolrServer getRemoteServer(String host, int port) {
-        return new HttpSolrServer("http://" + host + ":" + port + "/solr");
-    }
 
     @Override
     public String toString() {
-        return "Solr{" + server + '}';
+        return serverString;
     }
 
     public void addBeans(List<Ad> ads) throws IOException, SolrServerException {
@@ -97,4 +101,6 @@ public class Solr {
         server.deleteByQuery(s);
         server.commit();
     }
+
+
 }
