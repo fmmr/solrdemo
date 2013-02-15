@@ -31,7 +31,6 @@ public class Application extends Controller {
     private static SolrHost getSolrHost() throws MalformedURLException {
         String uuid = getUUID();
         String host = (String) Cache.get(uuid + "_solr.host");
-        System.out.println("host = " + host);
         if (host == null) {
             host = new SolrHost(RemoteSolr.getSolr().toString()).toString();
             session(uuid + "_solr.host", host);
