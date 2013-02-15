@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Ad;
+import models.ResultSet;
 import models.Solr;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.FacetField;
@@ -28,9 +29,8 @@ public class LocalSolr extends Controller {
     }
 
     public static Result search() throws SolrServerException {
-        QueryResponse rsp = solr.search("*:*");
-        List<Ad> adList = rsp.getBeans(Ad.class);
-        return ok(ads.render(adList, rsp.getResults().getNumFound()));
+        ResultSet rsp = solr.search("*:*");
+        return ok(ads.render(rsp));
     }
 
     static long getCount() throws SolrServerException {

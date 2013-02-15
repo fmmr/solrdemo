@@ -1,16 +1,17 @@
-@(ads: List[Ad], num: Long = 0L)
+@(ads: ResultSet)
+@import scala.collection.JavaConverters._
 
-@main(title = "Total matches: " + num + " ads") {
+@main(title = "Total matches: " + ads.count + " ads") {
 
     <table class="table-hover table-striped">
         <thead>
-        <tr>
-            <th> Id </th>
-            <th> Company name </th>
-            <th> Title </th>
-        </tr>
+            <tr>
+                <th> Id </th>
+                <th> Company name </th>
+                <th> Title </th>
+            </tr>
         </thead>
-        @for(ad <- ads) {
+        @for(ad: Ad <- ads.ads) {
             <tr>
             <td> @ad.id </td>
             <td> @ad.companyname </td>

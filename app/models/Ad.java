@@ -1,6 +1,7 @@
 package models;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.apache.solr.common.SolrDocument;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.Random;
@@ -39,6 +40,14 @@ public class Ad {
         ad.id = UUID.randomUUID().toString();
         ad.companyname = (NAMES[new Random().nextInt(NAMES.length)]);
         ad.title = "Title for ad from company " + ad.companyname;
+        return ad;
+    }
+
+    static Ad getAd(SolrDocument entries) {
+        Ad ad = new Ad();
+        ad.title = (String) entries.getFieldValue("heading");
+        ad.companyname = (String) entries.getFieldValue("companyname");
+        ad.id = (String) entries.getFieldValue("id");
         return ad;
     }
 
