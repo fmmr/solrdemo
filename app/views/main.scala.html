@@ -1,19 +1,21 @@
-@(title: String, ms: Long = 0L)(content: Html)
+@(title: String)(content: Html)
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <title> @title </title>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favico.png")">
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
 </head>
 <body>
-    <h2 class="title"> @title </h2>
-    @content
-    <br> <br>
-
-    @footer(ms)
+    <div class="container">
+        <h2 class="title"> @title </h2>
+        @content
+        @footer()
+    </div>
 </body>
 </html>

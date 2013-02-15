@@ -50,13 +50,13 @@ public class Application extends Controller {
 
 
     public static Result updateSolrHost() {
-
         Form<SolrHost> userForm = form(SolrHost.class);
         Form<SolrHost> solrHostForm = userForm.bindFromRequest();
 
         if (solrHostForm.hasErrors()) {
             Logger.error("ERROR IN FORM");
-            return badRequest("ERROR IN FORM");
+            flash("error", "Error in solr-host-parameters");
+            return redirect(routes.Application.index());
         }
 
         SolrHost solr = solrHostForm.get();
@@ -66,7 +66,7 @@ public class Application extends Controller {
             flash("message", "Solr host updated to: " + solr);
         } else {
             Logger.error("NO SOLR FOUND");
-            flash("message", "Solr host not found");
+            flash("error", "Solr host not found");
         }
 
         return redirect(routes.Application.index());

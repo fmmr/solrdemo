@@ -12,23 +12,35 @@
             navigator.geolocation.getCurrentPosition(showMap);
             });
     </script>
+    <div class="text-error error">
+        @flash.get("error")
+    </div>
+    <div class="text-success">
+        @flash.get("message")
+    </div>
 
-    @flash.get("message")
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <h3> Local operations </h3>
+                <i class="icon-indent-left"></i> <a href="@routes.LocalSolr.add()"> add 1 ad to index </a> <br>
+                <i class="icon-indent-left"></i> <a href="@routes.LocalSolr.add(100)"> add 100 ads to index </a> <br>
+                <i class="icon-search"></i> <a href="@routes.LocalSolr.search()"> get 10 random ads from index </a> <br>
+                <i class="icon-search"></i> <a href="@routes.LocalSolr.facets()"> get 10 facets on companyname </a> <br>
+                <i class="icon-remove"></i> <a href="@routes.LocalSolr.removeAll()"> clear local index </a> <br>
+            </div>
+            <div class="span6">
+                <h3> Remote operations </h3>
+                @helper.form(action = routes.Application.updateSolrHost(), 'id -> "myForm", 'method -> "POST", 'class -> "form-inline") {
+                    <input id="host" class="input-medium" type="text" value="@myForm("host").value" name="@myForm("host").name">
+                    <input id="port" class="input-mini" type="number" value="@myForm("port").value" name="@myForm("port").name">
+                    <button type="submit" class="btn">Update</button>
+                }
+                <i class="icon-search"></i> <a class="geosearch" href="@routes.RemoteSolr.search()"> get 10 ads from remote index </a> <br>
+            </div>
+        </div>
+    </div>
 
-    <h3> Local operations </h3>
-    <a href="@routes.LocalSolr.add()"> add 1 ad to index </a> <br>
-    <a href="@routes.LocalSolr.add(100)"> add 100 ads to index </a> <br>
-    <a href="@routes.LocalSolr.search()"> get 10 random ads from index </a> <br>
-    <a href="@routes.LocalSolr.facets()"> get 10 facets on companyname </a> <br>
-    <a href="@routes.LocalSolr.removeAll()"> clean index </a> <br>
 
-    <h3> Remote operations </h3>
-    @helper.form(action = routes.Application.updateSolrHost(), 'id -> "myForm", 'method -> "POST") {
-        @helper.inputText(myForm("host"), 'class -> "hostinput")
-        @helper.inputText(myForm("port"), 'class -> "hostinput")
-        <input class='submit' type='submit' name='mysubmit' value='update' />
-    }
-
-    <a class="geosearch" href="@routes.RemoteSolr.search()"> get 10 ads from remote index </a> <br>
 }
 
