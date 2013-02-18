@@ -10,6 +10,7 @@ import static play.data.validation.Constraints.Required;
  * Date: 14.02.13
  * Time: 11:31
  */
+@SuppressWarnings("UnusedDeclaration")
 public final class SolrHost {
     @Required
     public String host;
@@ -32,6 +33,21 @@ public final class SolrHost {
         this.port = url.getPort();
     }
 
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
 
     @Override
     public boolean equals(Object o) {
